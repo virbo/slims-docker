@@ -26,6 +26,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       intl xml xmlwriter gettext mbstring zip mysqli pdo_mysql iconv gd \
     && rm -rf /var/lib/apt/lists/*
 
+RUN { \
+    echo 'error_reporting = E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED'; \
+    echo 'display_errors = Off'; \
+    echo 'log_errors = On'; \
+    echo 'error_log = /proc/self/fd/2'; \
+} > /usr/local/etc/php/conf.d/zz-production.ini
+
 COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
 COPY --from=slims-source /src/ /var/www/html/
 
