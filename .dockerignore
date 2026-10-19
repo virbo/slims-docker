@@ -1,0 +1,22 @@
+# Secrets and local runtime data
+.env
+.env.*
+!.env.example
+data/
+backups/
+*.sql
+*.sql.gz
+*.dump
+*.log
+
+# VCS / editor / OS files
+.git
+.git/**
+.github/ISSUE_TEMPLATE
+.DS_Store
+.idea/
+.vscode/
+
+# Do not send local dependency/build artifacts
+vendor/
+node_modules/
