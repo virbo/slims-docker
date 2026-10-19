@@ -49,6 +49,9 @@ foreach (['env.php' => $envContents, 'database.php' => $dbContents] as $name => 
         fwrite(STDERR, "Could not write SLiMS configuration: {$name}\n");
         exit(1);
     }
+    // PHP-FPM runs as www-data; keep the DB credentials private but readable by that user.
+    chown($temp, 'www-data');
+    chgrp($temp, 'www-data');
     chmod($temp, 0640);
     if (!rename($temp, $target)) {
         @unlink($temp);
